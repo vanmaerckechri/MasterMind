@@ -1,0 +1,21 @@
+html, body, div, span, h1, h2, h3, p, form, fieldset, legend, label, input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  vertical-align: baseline;
+  font-weight: normal; }
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: black;
+  color: white; }
+
+legend {
+  font-size: 20px; }
+
+/*# sourceMappingURL=style.css.map */

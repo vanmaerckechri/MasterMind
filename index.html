@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MasterMind</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+	<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+	<link rel="manifest" href="./manifest.json">
+	<link rel="mask-icon" href="./safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="theme-color" content="#d4c018">
+</head>
+<body>
+    <header>
+        <h1>MasterMind</h1>
+    </header>
+    <div id="main">
+        <div class="menuPrincipal">
+            <form>
+                <h2>Menu Principal</h2>
+                <fieldset>
+                    <legend>Autoriser les Couleurs Identiques: </legend>
+                    <input type="checkbox" name="couleurDif" id="couleurDif">
+                    <label for="couleurDif">Autoriser</label>
+                </fieldset>
+                <fieldset>
+                    <legend>Nombre de Couleurs Différentes: </legend>
+                    <input type="radio" name="couleurNbr" id="couleurNbr6" value="6">
+                    <label for="couleurNbr6">6 couleurs</label>
+                    <input type="radio" name="couleurNbr" id="couleurNbr8" value="8">
+                    <label for="couleurNbr8">8 couleurs</label>
+                    <input type="radio" name="couleurNbr" id="couleurNbr10" value="10">
+                    <label for="couleurNbr10">10 couleurs</label>
+                </fieldset>
+                <fieldset>
+                    <legend>Nombre de Tentatives: </legend>
+                    <input type="radio" name="tentatives" id="tentatives8" value="8">
+                    <label for="tentatives8">8 tentatives</label>
+                    <input type="radio" name="tentatives" id="tentatives10" value="10">
+                    <label for="tentatives10">10 tentatives</label>
+                    <input type="radio" name="tentatives" id="tentatives12" value="12">
+                    <label for="tentatives12">12 tentatives</label>
+                </fieldset>
+            </form>
+            <input type="button" value="Options par Défaut"> 
+        </div>
+	</div>
+    <footer>
+    </footer>
+    <script src="upup.min.js"></script>
+    <script>
+        UpUp.start({
+          'content-url': 'index.html',
+          'assets': ['assets/css/style.css']
+        });
+    </script>
+</body>
+</html>

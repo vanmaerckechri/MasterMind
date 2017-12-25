@@ -1,0 +1,23 @@
+/* @import "reset"; */
+.extend {
+  background-image: linear-gradient(#ffffe1, #ffebd7); }
+
+.extend {
+  background-image: linear-gradient(#ffffe1, #ffebd7); }
+
+body {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: black; }
+
+.extend {
+  background-image: linear-gradient(#ffffe1, #ffebd7); }
+
+.extend {
+  background-image: linear-gradient(#ffffe1, #ffebd7); }
+
+/* RESPONSIVE */
+
+/*# sourceMappingURL=style.css.map */
