@@ -1,0 +1,33 @@
+#ecranJeu
+{
+	display: none;
+	min-width: 280px;
+}
+.case
+{
+	margin: 5px;
+	border-radius: 50%;
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	background-color: white;
+}
+.casesRow
+{
+	display: flex;
+}
+.caseResultatRow
+{
+	border-radius: 0px;
+	display: flex;
+	flex-wrap: wrap;
+	background-color: black;
+}
+.caseResultat
+{
+	border-radius: 50%;
+	border: 1px solid black;
+	width: 50%;
+	height: 50%;
+	background-color: grey;
+}

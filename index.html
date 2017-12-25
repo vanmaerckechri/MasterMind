@@ -18,7 +18,7 @@
         <h1>MasterMind</h1>
     </header>
     <div id="main">
-        <div class="menuPrincipal">
+        <div id="ecranMenuPrincipal">
             <form>
                 <h2>Menu Principal</h2>
                 <fieldset>
@@ -46,7 +46,11 @@
                 </fieldset>
             </form>
             <button onclick="optionsDefaut();">Options par Défaut</button>
-            <button>Commencer la Partie</button>
+            <button onclick="nouvellePartie();">Commencer la Partie</button>
+        </div>
+        <div id="ecranJeu">
+            <div id="tableCases">
+            </div>
         </div>
 	</div>
     <footer>
