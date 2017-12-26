@@ -46,4 +46,35 @@ legend {
   height: 50%;
   background-color: grey; }
 
+#pions {
+  display: flex;
+  justify-content: space-around;
+  background-color: grey; }
+
+.pion {
+  margin: 5px;
+  border: 2px solid grey;
+  border-radius: 50%;
+  display: inline-block;
+  width: 32px;
+  height: 32px; }
+
+.jaune {
+  background-color: yellow; }
+
+.bleu {
+  background-color: blue; }
+
+.rouge {
+  background-color: red; }
+
+.vert {
+  background-color: green; }
+
+.blanc {
+  background-color: white; }
+
+.noir {
+  background-color: black; }
+
 /*# sourceMappingURL=style.css.map */
