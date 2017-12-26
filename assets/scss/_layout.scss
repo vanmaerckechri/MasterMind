@@ -6,11 +6,12 @@
 .case
 {
 	margin: 5px;
+	border: 2px solid grey;
 	border-radius: 50%;
 	display: inline-block;
 	width: 48px;
 	height: 48px;
-	background-color: white;
+	background-color: grey;
 }
 .casesRow
 {
@@ -46,27 +47,27 @@
 	width: 32px;
 	height: 32px;	
 }
-.jaune
+.yellow
 {
 	background-color: yellow;
 }
-.bleu
+.blue
 {
 	background-color: blue
 }
-.rouge
+.red
 {
 	background-color: red;
 }
-.vert
+.green
 {
 	background-color: green;
 }
-.blanc
+.white
 {
 	background-color: white;
 }
-.noir
+.black
 {
 	background-color: black;
 }

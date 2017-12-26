@@ -52,13 +52,21 @@ function placementCases()
 var caseRowAct = 0;
 
 
-function deposerPion()
+function deposerPion(couleur)
 {
 	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
-	rowActuelle.onmousemove = function()
+	for (i = 0; i < 4; i++)
 	{
-		rowActuelle.childNodes[1].style.backgroundColor = "red";
-	} 
+		rowActuelle.childNodes[i].onmouseover = function()
+		{
+			if (boulotFait == false)
+			{
+				boulotFait = true;
+				this.style.backgroundColor = couleur;
+			}
+		}
+	}
+	boulotFait = false;
 	pionEnDeplacement = false;
 }
 
@@ -98,9 +106,9 @@ function choisirPion(event, couleur)
 		/* Lache l'élément lorsque le clique de la souris est relaché */
 		couleurSelect.onmouseup = function()
 		{
-			deposerPion();
-		    couleurSelect.onmouseup = null;
+			couleurSelect.onmouseup = null;
 			document.getElementById("couleurSelect").remove();
+			deposerPion(couleur);
 		};
 	}
 
