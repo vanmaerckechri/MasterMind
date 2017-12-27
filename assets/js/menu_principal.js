@@ -1,6 +1,7 @@
 var couleurDifAutoriser = false;
 var couleurDifNbr = 6;
 var tentativesNbr = 10;
+var couleurDif = ['yellow', 'blue', 'red', 'green', 'white', 'black', 'maroon', 'purple', 'orange', 'pink'];
 
 function optionsDefaut()
 {
@@ -43,11 +44,20 @@ function placementCases()
 	let distributionCaseRowId = 0;
 	let distributionResultatRowId = 0;
 	let distributionResultatId = 0;
+	document.getElementById('rowSecrete').innerHTML += '<span class="case"></span><span class="case"></span><span class="case"></span><span class="case"></span>';
 	for (i = 0; i < tentativesNbr; i++)
 	{
-		document.getElementById('tableCases').innerHTML += '<div id="caseRow'+(distributionCaseRowId++)+'" class="casesRow"><span id="case" class="case"></span><span id="case" class="case"></span><span id="case" class="case"></span><span id="case" class="case"></span><span id="caseResultatRow'+(distributionResultatRowId++)+'" class="case caseResultatRow"><span id="caseResultat'+(distributionResultatId++)+'" class="caseResultat"></span><span id="caseResultat'+(distributionResultatId++)+'" class="caseResultat"></span><span id="caseResultat'+(distributionResultatId++)+'" class="caseResultat"></span><span id="caseResultat'+(distributionResultatId++)+'" class="caseResultat"></span></span></div>';
+		document.getElementById('tableCases').innerHTML += '<div id="caseRow'+(distributionCaseRowId++)+'" class="casesRow"><span class="case"></span><span class="case"></span><span class="case"></span><span class="case"></span><span id="caseResultatRow'+(distributionResultatRowId++)+'" class="case caseResultatRow"><span id="caseResultat'+(distributionResultatId++)+'" class="caseResultat"></span><span id="caseResultat'+(distributionResultatId++)+'" class="caseResultat"></span><span id="caseResultat'+(distributionResultatId++)+'" class="caseResultat"></span><span id="caseResultat'+(distributionResultatId++)+'" class="caseResultat"></span></span></div>';
+	}
+	for (i = 0; i < couleurDifNbr; i++)
+	{
+		let couleur;
+		couleur = couleurDif[i];
+		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
 	}
 }
+/* Construction Combinaison Secrete */
+
 
 var caseRowAct = 0;
 

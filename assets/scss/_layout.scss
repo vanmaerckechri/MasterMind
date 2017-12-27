@@ -1,9 +1,9 @@
 #ecranJeu
 {
 	display: none;
-	min-width: 280px;
+	width: 280px;
 }
-.case
+.case, .caseSecrete
 {
 	margin: 5px;
 	border: 2px solid grey;
@@ -13,7 +13,7 @@
 	height: 48px;
 	background-color: grey;
 }
-.casesRow
+.casesRow, #rowSecrete
 {
 	display: flex;
 }
@@ -35,6 +35,7 @@
 #pions
 {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-around;
 	background-color: grey;
 }
@@ -70,4 +71,20 @@
 .black
 {
 	background-color: black;
+}
+.maroon
+{
+	background-color: maroon;
+}
+.purple
+{
+	background-color: purple;
+}
+.orange
+{
+	background-color: orange;
+}
+.pink
+{
+	background-color: pink;
 }
