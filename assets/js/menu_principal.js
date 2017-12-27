@@ -52,6 +52,15 @@ function placementCases()
 var caseRowAct = 0;
 
 
+function desactiveOnMouseOver()
+{
+	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
+	for (i = 0; i < 4; i++)
+	{
+		rowActuelle.childNodes[i].onmouseover = null;
+	}	
+}
+
 function deposerPion(couleur)
 {
 	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
@@ -59,14 +68,10 @@ function deposerPion(couleur)
 	{
 		rowActuelle.childNodes[i].onmouseover = function()
 		{
-			if (boulotFait == false)
-			{
-				boulotFait = true;
-				this.style.backgroundColor = couleur;
-			}
+			this.style.backgroundColor = couleur;
 		}
 	}
-	boulotFait = false;
+	setTimeout(desactiveOnMouseOver, 100);
 	pionEnDeplacement = false;
 }
 
