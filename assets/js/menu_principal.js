@@ -69,7 +69,7 @@ function combiSecreteInstall()
 		for (i = 0; i < colNbr; i++)
 		{
 			randomNum = Math.floor(Math.random()*couleurNbrRestantes);
-			document.getElementById('rowSecrete').innerHTML += '<span class="case" style="background-color: '+couleurDifRestantes[randomNum]+';"></span>';
+			document.getElementById('rowSecrete').innerHTML += '<span class="case" style="background-color: '+couleurDifRestantes[randomNum]+'; visibility: hidden;"></span>';
 			couleurDifRestantes.splice(randomNum, 1);
 			couleurNbrRestantes--;
 		}
@@ -245,10 +245,20 @@ function indicesAfficher(ind1, ind2, ind3, ind4)
 
 function victoire()
 {
-	document.getElementById("tableCases").innerHTML += "VICTOIRE";
+	let rowSecreteID = document.getElementById('rowSecrete');
+	for (i = 0; i < colNbr; i++)
+	{
+		rowSecreteID.childNodes[i].style.visibility = "visible";
+	}
+	document.getElementById('main').innerHTML += '<h3 style="color: green">VICTOIRE</h3>';
 }
 
 function defaite()
 {
-	document.getElementById("tableCases").innerHTML += "DEFAITE";	
+	let rowSecreteID = document.getElementById('rowSecrete');
+	for (i = 0; i < colNbr; i++)
+	{
+		rowSecreteID.childNodes[i].style.visibility = "visible";
+	}
+	document.getElementById('main').innerHTML += '<h3 style="color: red;">DEFAITE</h3>';	
 }

@@ -18,6 +18,12 @@ body {
 legend {
   font-size: 20px; }
 
+#main {
+  text-align: center; }
+
+#main #ecranMenuPrincipal {
+  text-align: left; }
+
 #ecranJeu {
   display: none;
   width: 280px; }
@@ -33,6 +39,10 @@ legend {
 
 .casesRow, #rowSecrete {
   display: flex; }
+
+#rowSecrete {
+  border-radius: 10px;
+  background-color: grey; }
 
 .caseResultatRow {
   border-radius: 0px;
