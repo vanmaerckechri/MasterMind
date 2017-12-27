@@ -4,6 +4,7 @@ var tentativesNbr = 10;
 var couleurDif = ['yellow', 'blue', 'red', 'green', 'white', 'black', 'maroon', 'purple', 'orange', 'pink'];
 var caseRowAct = 0;
 var colNbr = 4;
+var joueurTour = true;
 
 function optionsDefaut()
 {
@@ -109,31 +110,34 @@ function deposerPion(couleur)
 }
 function choisirPion(event, couleur)
 {
-	document.getElementById('pions').innerHTML += '<div id="couleurSelect" class="pion '+couleur+'"></div>';
-	couleurSelect.style.position = 'absolute';
-	couleurSelect.style.zIndex = 1000;
-	moveAt(event.pageX, event.pageY);
-	/* Bouge l'élément quand la souris bouge */
-	function moveAt(pageX, pageY)
+	if (joueurTour == true)
 	{
-		if (document.getElementById('couleurSelect'))
-		{
-			couleurSelect.style.left = pageX - couleurSelect.offsetWidth / 2 + 'px';
-			couleurSelect.style.top = pageY - couleurSelect.offsetHeight / 2 + 'px';
-		}
-	}
-	function onMouseMove(event)
-	{
+		document.getElementById('pions').innerHTML += '<div id="couleurSelect" class="pion '+couleur+'"></div>';
+		couleurSelect.style.position = 'absolute';
+		couleurSelect.style.zIndex = 1000;
 		moveAt(event.pageX, event.pageY);
+		/* Bouge l'élément quand la souris bouge */
+		function moveAt(pageX, pageY)
+		{
+			if (document.getElementById('couleurSelect'))
+			{
+				couleurSelect.style.left = pageX - couleurSelect.offsetWidth / 2 + 'px';
+				couleurSelect.style.top = pageY - couleurSelect.offsetHeight / 2 + 'px';
+			}
+		}
+		function onMouseMove(event)
+		{
+			moveAt(event.pageX, event.pageY);
+		}
+		document.addEventListener('mousemove', onMouseMove);
+		/* Lache l'élément lorsque le clique de la souris est relaché */
+		couleurSelect.onmouseup = function()
+		{
+			couleurSelect.onmouseup = null;
+			document.getElementById("couleurSelect").remove();
+			deposerPion(couleur);
+		};
 	}
-	document.addEventListener('mousemove', onMouseMove);
-	/* Lache l'élément lorsque le clique de la souris est relaché */
-	couleurSelect.onmouseup = function()
-	{
-		couleurSelect.onmouseup = null;
-		document.getElementById("couleurSelect").remove();
-		deposerPion(couleur);
-	};
 }
 /* Verifie si la rangée actuelle est complète */
 function verifRowActuComplete()
@@ -158,6 +162,7 @@ function comparer()
 	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
 	let rowSecreteID = document.getElementById('rowSecrete');
 	let resultatComparaison = [];
+	let compterBonneReponses = 0;
 	for (i = 0; i < colNbr; i++)
 	{
 		for (j = 0; j < colNbr; j++)
@@ -183,7 +188,21 @@ function comparer()
 			}
 		}
 	}
-	indicesAfficher(resultatComparaison[0], resultatComparaison[1],resultatComparaison[2],resultatComparaison[3]);
+	for (i = 0; i < colNbr; i++)
+	{
+		if (resultatComparaison[i] == 'parfait')
+		{
+			compterBonneReponses++;
+		}
+	}
+	if (compterBonneReponses == colNbr)
+	{
+		victoire();
+	}
+	else
+	{
+		indicesAfficher(resultatComparaison[0], resultatComparaison[1],resultatComparaison[2],resultatComparaison[3]);
+	}
 }
 
 function indicesAfficher(ind1, ind2, ind3, ind4)
@@ -214,4 +233,22 @@ function indicesAfficher(ind1, ind2, ind3, ind4)
 		}
 	}
 	caseRowAct++;
+	if (caseRowAct > tentativesNbr-1)
+	{
+		defaite();
+	}
+	else
+	{
+		joueurTour = true;
+	}
+}
+
+function victoire()
+{
+	document.getElementById("tableCases").innerHTML += "VICTOIRE";
+}
+
+function defaite()
+{
+	document.getElementById("tableCases").innerHTML += "DEFAITE";	
 }
