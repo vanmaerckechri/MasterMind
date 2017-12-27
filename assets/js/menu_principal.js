@@ -44,7 +44,6 @@ function placementCases()
 	let distributionCaseRowId = 0;
 	let distributionResultatRowId = 0;
 	let distributionResultatId = 0;
-	document.getElementById('rowSecrete').innerHTML += '<span class="case"></span><span class="case"></span><span class="case"></span><span class="case"></span>';
 	for (i = 0; i < tentativesNbr; i++)
 	{
 		document.getElementById('tableCases').innerHTML += '<div id="caseRow'+(distributionCaseRowId++)+'" class="casesRow"><span class="case"></span><span class="case"></span><span class="case"></span><span class="case"></span><span id="caseResultatRow'+(distributionResultatRowId++)+'" class="case caseResultatRow"><span id="caseResultat'+(distributionResultatId++)+'" class="caseResultat"></span><span id="caseResultat'+(distributionResultatId++)+'" class="caseResultat"></span><span id="caseResultat'+(distributionResultatId++)+'" class="caseResultat"></span><span id="caseResultat'+(distributionResultatId++)+'" class="caseResultat"></span></span></div>';
@@ -55,8 +54,35 @@ function placementCases()
 		couleur = couleurDif[i];
 		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
 	}
+	combiSecreteInstall();
 }
 /* Construction Combinaison Secrete */
+function combiSecreteInstall()
+{
+	let couleurNbrRestantes = couleurDifNbr;
+	let couleurDifRestantes = couleurDif;
+	/* si l'utilisation d'une même couleur n'est pas autorisée */
+	if (couleurDifAutoriser == false)
+	{
+		for (i = 0; i < 4; i++)
+		{
+			randomNum = Math.floor(Math.random()*couleurNbrRestantes);
+			document.getElementById('rowSecrete').innerHTML += '<span class="case '+couleurDifRestantes[randomNum]+'"></span>';
+			couleurDifRestantes.splice(randomNum, 1);
+			couleurNbrRestantes--;
+		}
+	}
+	else
+	{
+		for (i = 0; i < 4; i++)
+		{
+			randomNum = Math.floor(Math.random()*couleurNbrRestantes);
+			document.getElementById('rowSecrete').innerHTML += '<span class="case '+couleurDifRestantes[randomNum]+'"></span>';
+		}
+	}
+}
+
+
 
 
 var caseRowAct = 0;
