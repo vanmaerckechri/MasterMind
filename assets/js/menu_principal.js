@@ -1,4 +1,4 @@
-var couleurDifAutoriser = false;
+var couleurIdentiquesAutoriser = false;
 var couleurDifNbr = 6;
 var tentativesNbr = 10;
 var couleurDif = ['yellow', 'blue', 'red', 'green', 'white', 'black', 'maroon', 'purple', 'orange', 'pink'];
@@ -8,7 +8,7 @@ var joueurTour = true;
 
 function optionsDefaut()
 {
-	document.getElementById('couleurDif').checked = false;
+	/* document.getElementById('couleurIdentiques').checked = false; */
 	document.getElementById('couleurNbr6').checked = true;
 	document.getElementById('tentatives10').checked = true;
 }
@@ -16,7 +16,7 @@ function optionsDefaut()
 function nouvellePartie()
 {
 	/* Stockage du choix fait dans les options */
-	couleurDifAutoriser = document.getElementById('couleurDif').checked;
+	/* couleurIdentiquesAutoriser = document.getElementById('couleurIdentiques').checked; */
 	let inputs = document.getElementsByName('couleurNbr');
 	let inputsLength = inputs.length;
 	for (var i = 0; i < inputsLength; i++)
@@ -64,7 +64,7 @@ function combiSecreteInstall()
 	let couleurNbrRestantes = couleurDifNbr;
 	let couleurDifRestantes = couleurDif;
 	/* si l'utilisation d'une même couleur n'est pas autorisée */
-	if (couleurDifAutoriser == false)
+	if (couleurIdentiquesAutoriser == false)
 	{
 		for (i = 0; i < colNbr; i++)
 		{
