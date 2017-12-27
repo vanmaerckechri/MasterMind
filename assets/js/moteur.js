@@ -245,6 +245,7 @@ function indicesAfficher(ind1, ind2, ind3, ind4)
 
 function victoire()
 {
+	joueurTour = false;
 	let rowSecreteID = document.getElementById('rowSecrete');
 	for (i = 0; i < colNbr; i++)
 	{
