@@ -40,6 +40,9 @@ function nouvellePartie()
     document.getElementById('ecranJeu').style.display = "block";
     placementCases();
     combiSecreteInstall();
+    let rowActuelle = document.getElementById('caseRow'+caseRowAct);
+    rowActuelle.style.border = "1px solid white";
+    rowActuelle.style.backgroundColor = "rgba(255, 255, 255, .2)"
 }
 
 /* Création de la table de jeu */
@@ -247,7 +250,7 @@ function comparer()
 		indicesAfficher(resultatComparaison[0], resultatComparaison[1],resultatComparaison[2],resultatComparaison[3]);
 	}
 }
-
+/* Affichage des Indices, affichage row actuelle et verification defaite */
 function indicesAfficher(ind1, ind2, ind3, ind4)
 {
 	/* mélange les indices */
@@ -255,6 +258,7 @@ function indicesAfficher(ind1, ind2, ind3, ind4)
 	let indices = [];
 	let NbrRestant = colNbr;
 	let randomNum;
+	let rowPrecedente = document.getElementById('caseRow'+caseRowAct);
 	for (i = 0; i < colNbr; i++)
 	{
 		randomNum = Math.floor(Math.random()*NbrRestant);
@@ -276,18 +280,26 @@ function indicesAfficher(ind1, ind2, ind3, ind4)
 		}
 	}
 	caseRowAct++;
+    /* test de defaite */
 	if (caseRowAct > tentativesNbr-1)
 	{
 		defaite();
 	}
+	/* On donne le tour au joueur et on met à jour le visuel de la rangée active */
 	else
 	{
+		rowPrecedente.style.border = "";
+    	rowPrecedente.style.backgroundColor = ""
+		rowActuelle = document.getElementById('caseRow'+caseRowAct);
+		rowActuelle.style.border = "1px solid white";
+    	rowActuelle.style.backgroundColor = "rgba(255, 255, 255, .2)"
 		joueurTour = true;
 	}
 }
 
 function victoire()
 {
+	joueurTour = false;
 	let rowSecreteID = document.getElementById('rowSecrete');
 	for (i = 0; i < colNbr; i++)
 	{
