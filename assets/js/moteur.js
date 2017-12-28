@@ -142,6 +142,11 @@ function choisirPion(event, couleur)
 		};
 	}
 }
+
+
+
+
+
 /* TACTILE : Déplacement du pion choisi - drag and drop*/
 function deposerPionTouch(couleur)
 {
@@ -185,6 +190,11 @@ function choisirPionTouch(event, couleur)
 		};
 	}
 }
+
+
+
+
+
 /* Verifie si la rangée actuelle est complète */
 function verifRowActuComplete()
 {
