@@ -58,7 +58,7 @@ function placementCases()
 	{
 		let couleur;
 		couleur = couleurDif[i];
-		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event,\''+couleur+'\');"></span>';
+		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event,\''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
 	}
 }
 /* Construction Combinaison Secrete */
