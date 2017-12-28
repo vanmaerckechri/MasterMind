@@ -58,7 +58,7 @@ function placementCases()
 	{
 		let couleur;
 		couleur = couleurDif[i];
-		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchstart="touchAvailable=false; choisirPionTouch(event,\''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
+		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event,\''+couleur+'\');"></span>';
 	}
 }
 /* Construction Combinaison Secrete */
@@ -163,13 +163,18 @@ function deposerPionTouch(couleur)
 
 }
 function choisirPionTouch(event, couleur)
-{
+{	let pionMobile = document.getElementById('couleurSelect');
+	event.preventDefault();
 	if (joueurTour == true)
 	{
-		document.getElementById('pions').innerHTML += '<div id="couleurSelect" class="pion '+couleur+'"></div>';
-		couleurSelect.style.position = 'absolute';
-		couleurSelect.style.zIndex = 1000;
-		moveAt(event.touches[0].pageX, event.touches[0].pageY);
+		if (pionMobile == null)
+		{
+			document.getElementById('pions').innerHTML += '<div id="couleurSelect" class="pion '+couleur+'"></div>';
+			couleurSelect.style.position = 'absolute';
+			couleurSelect.style.zIndex = 1000;
+		}
+			moveAt(event.touches[0].pageX, event.touches[0].pageY);
+
 		/* Bouge l'élément quand la souris bouge */
 		function moveAt(pageX, pageY)
 		{
@@ -180,13 +185,15 @@ function choisirPionTouch(event, couleur)
 		{
 			moveAt(event.touches[0].pageX, event.touches[0].pageY);
 		}
-		document.addEventListener('touchmove', ontouchmove);
+		couleurSelect.addEventListener('touchmove', ontouchmove);
 		/* Lache l'élément lorsque le clique de la souris est relaché */
-		couleurSelect.ontouchend = function()
+		document.ontouchend = function()
 		{
-			alert('1');
-			document.getElementById("couleurSelect").remove();
+			alert("ontouchend");
 			deposerPionTouch(couleur);
+			couleurSelect.removeEventListener('touchmove', ontouchmove);
+			document.ontouchend = null;
+			document.getElementById("couleurSelect").remove();
 		};
 	}
 }
