@@ -110,8 +110,8 @@ function deposerPion(couleur)
 			this.style.backgroundColor = couleur;
 		}
 	}
-	setTimeout(desactiveOnMouseOver, 10);
-	setTimeout(verifRowActuComplete, 20);
+	setTimeout(desactiveOnMouseOver, 30);
+	setTimeout(verifRowActuComplete, 40);
 }
 function choisirPion(event, couleur)
 {
@@ -144,13 +144,7 @@ function choisirPion(event, couleur)
 		};
 	}
 }
-
-
-
-
-
 /* TACTILE : Déplacement du pion choisi - drag and drop*/
-
 function choisirPionTouch(event, pionChoisi, couleur)
 {
 	if (joueurTour == true && pionEnMouvement == false)
@@ -166,24 +160,18 @@ function choisirPionTouch(event, pionChoisi, couleur)
 
 		function moveAt(pageX, pageY, pionChoisi)
 		{
-			console.log('move');
 			pionChoisi.style.left = pageX - pionChoisi.offsetWidth / 2 + 'px';
 			pionChoisi.style.top = pageY - pionChoisi.offsetHeight / 2 + 'px';
 		}
-
-
 function relacherPion()
 {
-	console.log(pionEnMouvement);
 	if (pionEnMouvement == true)
 	{	
-		console.log("end");
 		couleur = pionEnMouvCouleur;
 		deposerPionTouch(couleur);
 	}
 }
 document.addEventListener('touchend', relacherPion);
-
 function deposerPionTouch(couleur)
 {
 	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
@@ -205,10 +193,6 @@ function deposerPionTouch(couleur)
 	document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, this, \''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
 	pionEnMouvement = false;
 }
-
-
-
-
 /* Verifie si la rangée actuelle est complète */
 function verifRowActuComplete()
 {
@@ -226,7 +210,6 @@ function verifRowActuComplete()
 		}
 	}
 }
-
 function comparer()
 {
 	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
@@ -320,7 +303,6 @@ function indicesAfficher(ind1, ind2, ind3, ind4)
 		joueurTour = true;
 	}
 }
-
 function victoire()
 {
 	joueurTour = false;
@@ -331,7 +313,6 @@ function victoire()
 	}
 	document.getElementById('main').innerHTML += '<h3 style="color: green">VICTOIRE</h3>';
 }
-
 function defaite()
 {
 	let rowSecreteID = document.getElementById('rowSecrete');
