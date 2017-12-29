@@ -42,6 +42,7 @@ function nouvellePartie()
     /* Passage à l'Ecran de Jeu */
     document.getElementById('ecranMenuPrincipal').style.display = "none";
     document.getElementById('ecranJeu').style.display = "block";
+    document.getElementById('recommencer').style.display = "block";
     placementCases();
     combiSecreteInstall();
     let rowActuelle = document.getElementById('caseRow'+caseRowAct);
@@ -331,6 +332,7 @@ function victoire()
 }
 function defaite()
 {
+	joueurTour = false;
 	let rowSecreteID = document.getElementById('rowSecrete');
 	for (i = 0; i < colNbr; i++)
 	{

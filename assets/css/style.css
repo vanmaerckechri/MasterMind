@@ -65,6 +65,18 @@ h3 {
   border-radius: 10px;
   background-color: grey; }
 
+#recommencer {
+  display: none;
+  border: 1px solid orange;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 280px;
+  font-size: 16px; }
+
+#recommencer:hover {
+  border: 1px solid white;
+  background-color: orange; }
+
 .caseResultatRow {
   border-radius: 0px;
   display: flex;
