@@ -5,6 +5,8 @@ var couleurDif = ['yellow', 'blue', 'red', 'green', 'white', 'black', 'maroon', 
 var caseRowAct = 0;
 var colNbr = 4;
 var joueurTour = true;
+var pionEnMouvement = false;
+var pionID;
 
 function optionsDefaut()
 {
@@ -58,7 +60,7 @@ function placementCases()
 	{
 		let couleur;
 		couleur = couleurDif[i];
-		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchstart="test(event,\''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
+		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, this);" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
 	}
 }
 /* Construction Combinaison Secrete */
@@ -149,23 +151,37 @@ function choisirPion(event, couleur)
 
 /* TACTILE : Déplacement du pion choisi - drag and drop*/
 
-
-document.addEventListener('touchend', test2);
-
-	function test2()
+function choisirPionTouch(event, pionChoisi)
+{
+	if (joueurTour == true && pionEnMouvement == false)
 	{
-			console.log("end");
-	}	
-
-	function test(event, color)
-	{
-		console.log();
-		console.log(color);
-		document.ontouchmove = function()
-		{
-			console.log("move");
-		};
+		pionID = pionChoisi;
+		pionEnMouvement = true;
+		pionChoisi.style.position = 'absolute';
+		pionChoisi.style.zIndex = 1000;
 	}
+		moveAt(event.touches[0].pageX, event.touches[0].pageY, pionChoisi);
+}
+
+		function moveAt(pageX, pageY, pionChoisi)
+		{
+			console.log('move');
+			pionChoisi.style.left = pageX - pionChoisi.offsetWidth / 2 + 'px';
+			pionChoisi.style.top = pageY - pionChoisi.offsetHeight / 2 + 'px';
+		}
+
+
+function relacherPion()
+{
+	console.log(pionEnMouvement);
+	if (pionEnMouvement == true)
+	{	
+		console.log("end");
+		pionID.remove();
+		pionEnMouvement = false;
+	}
+}
+document.addEventListener('touchend', relacherPion);
 
 
 
