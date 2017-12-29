@@ -8,8 +8,7 @@ var joueurTour = true;
 var pionEnMouvement = false;
 var pionID;
 var pionEnMouvCouleur;
-var distributionCaseRowId = 0;
-var distributionResultatRowId = 0;
+var CaseRowId = 0;
 
 function optionsDefaut()
 {
@@ -53,13 +52,19 @@ function nouvellePartie()
 /* Création de la table de jeu */
 function placementCases()
 {
-	document.getElementById('tableCases').innerHTML += '<div id="caseRow'+(distributionCaseRowId++)+'" class="casesRow"><span class="case"></span><span class="case"></span><span class="case"></span><span class="case"></span><span id="caseResultatRow'+(distributionResultatRowId++)+'" class="case caseResultatRow"><span class="caseResultat"></span><span class="caseResultat"></span><span class="caseResultat"></span><span class="caseResultat"></span></span></div>';
+	let distributionCaseRowId = 0;
+	let distributionResultatRowId = 0;
+	for (i = 0; i < tentativesNbr; i++)
+	{
+		document.getElementById('tableCases').innerHTML += '<div id="caseRow'+(distributionCaseRowId++)+'" class="casesRow"><span class="case"></span><span class="case"></span><span class="case"></span><span class="case"></span><span id="caseResultatRow'+(distributionResultatRowId++)+'" class="case caseResultatRow"><span class="caseResultat"></span><span class="caseResultat"></span><span class="caseResultat"></span><span class="caseResultat"></span></span></div>';
+	}
 	for (i = 0; i < couleurDifNbr; i++)
 	{
 		let couleur;
 		couleur = couleurDif[i];
 		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, this, \''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
 	}
+	deplacerTablePions();
 }
 /* Construction Combinaison Secrete */
 function combiSecreteInstall()
@@ -292,7 +297,7 @@ function indicesAfficher(ind1, ind2, ind3, ind4)
 	/* On donne le tour au joueur et on met à jour le visuel de la rangée active */
 	else
 	{
-		document.getElementById('tableCases').innerHTML += '<div id="caseRow'+(distributionCaseRowId++)+'" class="casesRow"><span class="case"></span><span class="case"></span><span class="case"></span><span class="case"></span><span id="caseResultatRow'+(distributionResultatRowId++)+'" class="case caseResultatRow"><span class="caseResultat"></span><span class="caseResultat"></span><span class="caseResultat"></span><span class="caseResultat"></span></span></div>';
+		deplacerTablePions();
 		rowPrecedente.style.border = "";
     	rowPrecedente.style.backgroundColor = ""
 		rowActuelle = document.getElementById('caseRow'+caseRowAct);
@@ -300,6 +305,14 @@ function indicesAfficher(ind1, ind2, ind3, ind4)
     	rowActuelle.style.backgroundColor = "rgba(255, 255, 255, .2)"
 		joueurTour = true;
 	}
+}
+function deplacerTablePions()
+{
+	CaseRowId++;
+	let pionsCouleur = document.getElementById('pions');
+	let parentHtml = document.getElementById('tableCases');
+	let frereHtml = document.getElementById('caseRow'+CaseRowId);
+	parentHtml.insertBefore(pionsCouleur, frereHtml);
 }
 function victoire()
 {
