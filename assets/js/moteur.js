@@ -156,6 +156,7 @@ function choisirPionTouch(event, pionChoisi, couleur)
 		pionEnMouvement = true;
 		pionChoisi.style.position = 'absolute';
 		pionChoisi.style.zIndex = 1000;
+		document.body.style.overflow = "hidden";
 	}
 		moveAt(event.touches[0].pageX, event.touches[0].pageY, pionChoisi);
 }
@@ -165,6 +166,7 @@ function choisirPionTouch(event, pionChoisi, couleur)
 			pionChoisi.style.left = pageX - pionChoisi.offsetWidth / 2 + 'px';
 			pionChoisi.style.top = pageY - pionChoisi.offsetHeight / 2 + 'px';
 		}
+
 function relacherPion()
 {
 	if (pionEnMouvement == true)
@@ -187,6 +189,7 @@ function deposerPionTouch(couleur)
 			pionID.remove();
 			document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, this, \''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
 			pionEnMouvement = false;
+			document.body.style.overflow = "auto";
 			verifRowActuComplete();
 			return;
 		}
@@ -194,6 +197,7 @@ function deposerPionTouch(couleur)
 	pionID.remove();
 	document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, this, \''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
 	pionEnMouvement = false;
+	document.body.style.overflow = "auto";
 }
 /* Verifie si la rangée actuelle est complète */
 function verifRowActuComplete()
