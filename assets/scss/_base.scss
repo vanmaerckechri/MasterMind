@@ -3,6 +3,7 @@ html
 }
 body
 {
+	overscroll-behavior: contain;
 	display: flex;
   	justify-content: center;
   	align-items: center;

@@ -151,6 +151,7 @@ function choisirPionTouch(event, pionChoisi, couleur)
 {
 	if (joueurTour == true && pionEnMouvement == false)
 	{
+		event.preventDefault();
 		pionEnMouvCouleur = couleur;
 		pionID = pionChoisi;
 		pionEnMouvement = true;
