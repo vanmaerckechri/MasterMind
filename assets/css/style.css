@@ -78,6 +78,7 @@ h3 {
   background-color: grey; }
 
 #pions {
+  bottom: 0px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;

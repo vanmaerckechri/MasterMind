@@ -8,6 +8,8 @@ var joueurTour = true;
 var pionEnMouvement = false;
 var pionID;
 var pionEnMouvCouleur;
+var distributionCaseRowId = 0;
+var distributionResultatRowId = 0;
 
 function optionsDefaut()
 {
@@ -51,12 +53,7 @@ function nouvellePartie()
 /* Création de la table de jeu */
 function placementCases()
 {
-	let distributionCaseRowId = 0;
-	let distributionResultatRowId = 0;
-	for (i = 0; i < tentativesNbr; i++)
-	{
-		document.getElementById('tableCases').innerHTML += '<div id="caseRow'+(distributionCaseRowId++)+'" class="casesRow"><span class="case"></span><span class="case"></span><span class="case"></span><span class="case"></span><span id="caseResultatRow'+(distributionResultatRowId++)+'" class="case caseResultatRow"><span class="caseResultat"></span><span class="caseResultat"></span><span class="caseResultat"></span><span class="caseResultat"></span></span></div>';
-	}
+	document.getElementById('tableCases').innerHTML += '<div id="caseRow'+(distributionCaseRowId++)+'" class="casesRow"><span class="case"></span><span class="case"></span><span class="case"></span><span class="case"></span><span id="caseResultatRow'+(distributionResultatRowId++)+'" class="case caseResultatRow"><span class="caseResultat"></span><span class="caseResultat"></span><span class="caseResultat"></span><span class="caseResultat"></span></span></div>';
 	for (i = 0; i < couleurDifNbr; i++)
 	{
 		let couleur;
@@ -295,6 +292,7 @@ function indicesAfficher(ind1, ind2, ind3, ind4)
 	/* On donne le tour au joueur et on met à jour le visuel de la rangée active */
 	else
 	{
+		document.getElementById('tableCases').innerHTML += '<div id="caseRow'+(distributionCaseRowId++)+'" class="casesRow"><span class="case"></span><span class="case"></span><span class="case"></span><span class="case"></span><span id="caseResultatRow'+(distributionResultatRowId++)+'" class="case caseResultatRow"><span class="caseResultat"></span><span class="caseResultat"></span><span class="caseResultat"></span><span class="caseResultat"></span></span></div>';
 		rowPrecedente.style.border = "";
     	rowPrecedente.style.backgroundColor = ""
 		rowActuelle = document.getElementById('caseRow'+caseRowAct);
