@@ -7,6 +7,7 @@ var colNbr = 4;
 var joueurTour = true;
 var pionEnMouvement = false;
 var pionID;
+var pionEnMouvCouleur;
 
 function optionsDefaut()
 {
@@ -60,7 +61,7 @@ function placementCases()
 	{
 		let couleur;
 		couleur = couleurDif[i];
-		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, this);" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
+		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, this, \''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
 	}
 }
 /* Construction Combinaison Secrete */
@@ -111,7 +112,6 @@ function deposerPion(couleur)
 	}
 	setTimeout(desactiveOnMouseOver, 10);
 	setTimeout(verifRowActuComplete, 20);
-
 }
 function choisirPion(event, couleur)
 {
@@ -151,10 +151,11 @@ function choisirPion(event, couleur)
 
 /* TACTILE : Déplacement du pion choisi - drag and drop*/
 
-function choisirPionTouch(event, pionChoisi)
+function choisirPionTouch(event, pionChoisi, couleur)
 {
 	if (joueurTour == true && pionEnMouvement == false)
 	{
+		pionEnMouvCouleur = couleur;
 		pionID = pionChoisi;
 		pionEnMouvement = true;
 		pionChoisi.style.position = 'absolute';
@@ -177,12 +178,33 @@ function relacherPion()
 	if (pionEnMouvement == true)
 	{	
 		console.log("end");
-		pionID.remove();
-		pionEnMouvement = false;
+		couleur = pionEnMouvCouleur;
+		deposerPionTouch(couleur);
 	}
 }
 document.addEventListener('touchend', relacherPion);
 
+function deposerPionTouch(couleur)
+{
+	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
+	for (i = 0; i < colNbr; i++)
+	{
+		rowActuelle.childNodes[i];
+		if (rowActuelle.childNodes[i].offsetLeft - pionID.offsetWidth/2 < pionID.offsetLeft && (rowActuelle.childNodes[i].offsetLeft + rowActuelle.childNodes[i].offsetWidth + pionID.offsetWidth/2) > (pionID.offsetLeft + pionID.offsetWidth) && 
+			rowActuelle.childNodes[i].offsetTop - pionID.offsetHeight < pionID.offsetTop && (rowActuelle.childNodes[i].offsetTop + rowActuelle.childNodes[i].offsetHeight + pionID.offsetHeight) > (pionID.offsetTop + pionID.offsetHeight))
+		{
+			rowActuelle.childNodes[i].style.backgroundColor = couleur;
+			pionID.remove();
+			document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, this, \''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
+			pionEnMouvement = false;
+			verifRowActuComplete();
+			return;
+		}
+	}
+	pionID.remove();
+	document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, this, \''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
+	pionEnMouvement = false;
+}
 
 
 
