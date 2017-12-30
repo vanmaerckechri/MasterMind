@@ -353,11 +353,7 @@ function victoire()
 		rowSecreteID.childNodes[i].style.visibility = "visible";
 	}
 	let rowActuelle = document.getElementById('caseRow'+(caseRowAct-1));
-	document.getElementById('informations').innerHTML = "VICTOIRE";
-	document.getElementById('informations').style.fontSize = "50px";
-	document.getElementById('informations').style.color = "green";
-	document.getElementById('informations').style.top = rowActuelle.offsetTop + 'px';
-	document.getElementById('informations').style.display = "block";
+	afficherInformations("VICTOIRE", "green");
 }
 function defaite()
 {
@@ -368,9 +364,17 @@ function defaite()
 		rowSecreteID.childNodes[i].style.visibility = "visible";
 	}
 	let rowActuelle = document.getElementById('caseRow'+(caseRowAct-1));
-	document.getElementById('informations').innerHTML = "DEFAITE";
+	afficherInformations("DEFAITE", "red");
+}
+function afficherInformations(texte, couleur)
+{
+	document.getElementById('informations').innerHTML = texte;
 	document.getElementById('informations').style.fontSize = "50px";
-	document.getElementById('informations').style.color = "red";
-	document.getElementById('informations').style.top = rowActuelle.offsetTop + 'px';
+	document.getElementById('informations').style.color = couleur;
+	document.getElementById('informations').style.position = "static";
+	let pionsCouleur = document.getElementById('informations');
+	let parentHtml = document.getElementById('tableCases');
+	let frereHtml = document.getElementById('pions');
+	parentHtml.insertBefore(pionsCouleur, frereHtml);
 	document.getElementById('informations').style.display = "block";
 }
