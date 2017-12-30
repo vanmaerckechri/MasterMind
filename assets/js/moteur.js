@@ -352,7 +352,12 @@ function victoire()
 	{
 		rowSecreteID.childNodes[i].style.visibility = "visible";
 	}
-	document.getElementById('main').innerHTML += '<h3 style="color: green">VICTOIRE</h3>';
+	let rowActuelle = document.getElementById('caseRow'+(caseRowAct-1));
+	document.getElementById('informations').innerHTML = "VICTOIRE";
+	document.getElementById('informations').style.fontSize = "50px";
+	document.getElementById('informations').style.color = "green";
+	document.getElementById('informations').style.top = rowActuelle.offsetTop + 'px';
+	document.getElementById('informations').style.display = "block";
 }
 function defaite()
 {
@@ -362,5 +367,10 @@ function defaite()
 	{
 		rowSecreteID.childNodes[i].style.visibility = "visible";
 	}
-	document.getElementById('main').innerHTML += '<h3 style="color: red;">DEFAITE</h3>';	
+	let rowActuelle = document.getElementById('caseRow'+(caseRowAct-1));
+	document.getElementById('informations').innerHTML = "DEFAITE";
+	document.getElementById('informations').style.fontSize = "50px";
+	document.getElementById('informations').style.color = "red";
+	document.getElementById('informations').style.top = rowActuelle.offsetTop + 'px';
+	document.getElementById('informations').style.display = "block";
 }
