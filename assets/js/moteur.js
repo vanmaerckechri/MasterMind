@@ -256,17 +256,10 @@ function comparer()
 			compterBonneReponses++;
 		}
 	}
-	if (compterBonneReponses == colNbr)
-	{
-		victoire();
-	}
-	else
-	{
-		indicesAfficher(resultatComparaison[0], resultatComparaison[1],resultatComparaison[2],resultatComparaison[3]);
-	}
+	indicesAfficher(resultatComparaison[0], resultatComparaison[1],resultatComparaison[2],resultatComparaison[3], compterBonneReponses);
 }
 /* Affichage des Indices, affichage row actuelle et verification defaite */
-function indicesAfficher(ind1, ind2, ind3, ind4)
+function indicesAfficher(ind1, ind2, ind3, ind4, conditionVictoire)
 {
 	/* mélange les indices */
 	let indicesTemp = [ind1, ind2, ind3, ind4];
@@ -295,6 +288,11 @@ function indicesAfficher(ind1, ind2, ind3, ind4)
 		}
 	}
 	caseRowAct++;
+	if (conditionVictoire == colNbr)
+	{
+		victoire();
+		return;
+	}
     /* test de defaite */
 	if (caseRowAct > tentativesNbr-1)
 	{
