@@ -113,7 +113,6 @@ function deposerPion(couleur)
 			this.style.backgroundColor = couleur;
 		}
 	}
-	document.getElementById('informations').style.display = "none";
 	setTimeout(desactiveOnMouseOver, 30);
 	setTimeout(couleurIdentiques, 40);
 }
@@ -193,7 +192,6 @@ function deposerPionTouch(couleur)
 			document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, this, \''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
 			pionEnMouvement = false;
 			document.body.style.overflow = "auto";
-			document.getElementById('informations').style.display = "none";
 			couleurIdentiques();
 			return;
 		}
@@ -214,8 +212,7 @@ function couleurIdentiques()
 		{
 			if (rowActuelle.childNodes[i].style.backgroundColor && rowActuelle.childNodes[i].style.backgroundColor == rowActuelle.childNodes[i+k].style.backgroundColor)
 			{
-				document.getElementById('informations').style.top = rowActuelle.offsetTop + 'px';
-				document.getElementById('informations').style.display = "block";
+				afficherInformations("couleurs identiques non autorisées", "red", "22px");
 				couleursIdentiquesPresentes = true;
 				return;
 			}
@@ -223,6 +220,7 @@ function couleurIdentiques()
 	}
 	if (couleursIdentiquesPresentes == false)
 	{
+		document.getElementById('informations').style.display = "none";
 		verifRowActuComplete();
 	}
 }
@@ -353,7 +351,7 @@ function victoire()
 		rowSecreteID.childNodes[i].style.visibility = "visible";
 	}
 	let rowActuelle = document.getElementById('caseRow'+(caseRowAct-1));
-	afficherInformations("VICTOIRE", "green");
+	afficherInformations("VICTOIRE", "green", "50px");
 }
 function defaite()
 {
@@ -364,14 +362,13 @@ function defaite()
 		rowSecreteID.childNodes[i].style.visibility = "visible";
 	}
 	let rowActuelle = document.getElementById('caseRow'+(caseRowAct-1));
-	afficherInformations("DEFAITE", "red");
+	afficherInformations("DEFAITE", "red", "50px");
 }
-function afficherInformations(texte, couleur)
+function afficherInformations(texte, couleur, taille)
 {
 	document.getElementById('informations').innerHTML = texte;
-	document.getElementById('informations').style.fontSize = "50px";
+	document.getElementById('informations').style.fontSize = taille;
 	document.getElementById('informations').style.color = couleur;
-	document.getElementById('informations').style.position = "static";
 	let pionsCouleur = document.getElementById('informations');
 	let parentHtml = document.getElementById('tableCases');
 	let frereHtml = document.getElementById('pions');
