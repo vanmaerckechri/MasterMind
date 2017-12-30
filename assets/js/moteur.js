@@ -9,6 +9,7 @@ var pionEnMouvement = false;
 var pionID;
 var pionEnMouvCouleur;
 var CaseRowId = 0;
+var couleursIdentiquesPresentes = false;
 
 function optionsDefaut()
 {
@@ -20,7 +21,6 @@ function optionsDefaut()
 function nouvellePartie()
 {
 	/* Stockage du choix fait dans les options */
-	/* couleurIdentiquesAutoriser = document.getElementById('couleurIdentiques').checked; */
 	let inputs = document.getElementsByName('couleurNbr');
 	let inputsLength = inputs.length;
 	for (var i = 0; i < inputsLength; i++)
@@ -113,8 +113,9 @@ function deposerPion(couleur)
 			this.style.backgroundColor = couleur;
 		}
 	}
+	document.getElementById('informations').style.display = "none";
 	setTimeout(desactiveOnMouseOver, 30);
-	setTimeout(verifRowActuComplete, 40);
+	setTimeout(couleurIdentiques, 40);
 }
 function choisirPion(event, couleur)
 {
@@ -192,7 +193,8 @@ function deposerPionTouch(couleur)
 			document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, this, \''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
 			pionEnMouvement = false;
 			document.body.style.overflow = "auto";
-			verifRowActuComplete();
+			document.getElementById('informations').style.display = "none";
+			couleurIdentiques();
 			return;
 		}
 	}
@@ -201,6 +203,30 @@ function deposerPionTouch(couleur)
 	pionEnMouvement = false;
 	document.body.style.overflow = "auto";
 }
+/* Verification couleurs identiques */
+function couleurIdentiques()
+{
+	couleursIdentiquesPresentes = false;
+	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
+	for (i = 0, j = colNbr-1; i < colNbr-1; i++, j--)
+	{
+		for (k = j; k > 0; k--)
+		{
+			if (rowActuelle.childNodes[i].style.backgroundColor && rowActuelle.childNodes[i].style.backgroundColor == rowActuelle.childNodes[i+k].style.backgroundColor)
+			{
+				document.getElementById('informations').style.top = rowActuelle.offsetTop + 'px';
+				document.getElementById('informations').style.display = "block";
+				couleursIdentiquesPresentes = true;
+				return;
+			}
+		}
+	}
+	if (couleursIdentiquesPresentes == false)
+	{
+		verifRowActuComplete();
+	}
+}
+
 /* Verifie si la rangée actuelle est complète */
 function verifRowActuComplete()
 {

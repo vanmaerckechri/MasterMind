@@ -1,23 +1,143 @@
-/* @import "reset"; */
-.extend {
-  background-image: linear-gradient(#ffffe1, #ffebd7); }
-
-.extend {
-  background-image: linear-gradient(#ffffe1, #ffebd7); }
+html, body, div, span, h1, h2, h3, p, form, fieldset, legend, label, input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  vertical-align: baseline;
+  font-weight: normal; }
 
 body {
+  overscroll-behavior: contain;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   min-height: 100vh;
+  background-color: black;
+  color: white; }
+
+fieldset {
+  margin-bottom: 10px; }
+
+button {
+  margin-bottom: 10px; }
+
+h1 {
+  margin-bottom: 10px;
+  color: orange; }
+
+legend, h3 {
+  width: 100%;
+  font-size: 20px; }
+
+h2 {
+  margin-bottom: 10px; }
+
+h3 {
+  border-top: 1px solid orange; }
+
+#main {
+  text-align: center; }
+
+#main #ecranMenuPrincipal {
+  text-align: left; }
+
+#ecranMenuPrincipal {
+  width: 280px; }
+
+#ecranJeu {
+  display: none;
+  width: 280px; }
+
+#informations {
+  font-size: 18px; }
+
+.case, .caseSecrete {
+  margin: 5px;
+  border: 2px solid grey;
+  border-radius: 50%;
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  background-color: grey; }
+
+.casesRow, #rowSecrete {
+  display: flex; }
+
+#rowSecrete {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background-color: grey; }
+
+#recommencer {
+  display: none;
+  border: 1px solid orange;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 280px;
+  font-size: 16px; }
+
+#recommencer:hover {
+  border: 1px solid white;
+  background-color: orange; }
+
+.caseResultatRow {
+  border-radius: 0px;
+  display: flex;
+  flex-wrap: wrap;
   background-color: black; }
 
-.extend {
-  background-image: linear-gradient(#ffffe1, #ffebd7); }
+.caseResultat {
+  border-radius: 50%;
+  border: 1px solid black;
+  width: 50%;
+  height: 50%;
+  background-color: grey; }
 
-.extend {
-  background-image: linear-gradient(#ffffe1, #ffebd7); }
+#pions {
+  bottom: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: grey; }
 
-/* RESPONSIVE */
+.pion {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 2px solid grey;
+  border-radius: 50%;
+  display: inline-block;
+  width: 42px;
+  height: 42px; }
+
+.yellow {
+  background-color: yellow; }
+
+.blue {
+  background-color: blue; }
+
+.red {
+  background-color: red; }
+
+.green {
+  background-color: green; }
+
+.white {
+  background-color: white; }
+
+.black {
+  background-color: black; }
+
+.maroon {
+  background-color: maroon; }
+
+.purple {
+  background-color: purple; }
+
+.orange {
+  background-color: orange; }
+
+.pink {
+  background-color: pink; }
 
 /*# sourceMappingURL=style.css.map */
