@@ -51,6 +51,9 @@ h3 {
 
 #informations {
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 280px;
   height: 58px;
   text-align: center;

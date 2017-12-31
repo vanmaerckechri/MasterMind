@@ -373,5 +373,5 @@ function afficherInformations(texte, couleur, taille)
 	let parentHtml = document.getElementById('tableCases');
 	let frereHtml = document.getElementById('pions');
 	parentHtml.insertBefore(pionsCouleur, frereHtml);
-	document.getElementById('informations').style.display = "block";
+	document.getElementById('informations').style.display = "flex";
 }
