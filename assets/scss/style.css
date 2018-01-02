@@ -50,7 +50,18 @@ h3 {
   width: 280px; }
 
 #informations {
-  font-size: 18px; }
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  height: 58px;
+  text-align: center;
+  font-size: 24px;
+  color: red;
+  text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+  background-color: rgba(255, 255, 255, 0.3);
+  pointer-events: none; }
 
 .case, .caseSecrete {
   margin: 5px;
