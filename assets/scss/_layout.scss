@@ -76,7 +76,10 @@
 	border: 1px solid black;
 	width: 50%;
 	height: 50%;
+	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	font-weight: 900;
 	background-color: grey;
+	pointer-events: none;
 }
 #pions
 {
@@ -135,4 +138,8 @@
 .pink
 {
 	background-color: pink;
+}
+.regles
+{
+	font-size: 18px;
 }

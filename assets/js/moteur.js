@@ -304,11 +304,11 @@ function indicesAfficher(ind1, ind2, ind3, ind4, conditionVictoire)
 	{
 		if (indices[i] == 'parfait')
 		{
-			rowResultatActuelle.childNodes[i].style.backgroundColor = "red";
+			rowResultatActuelle.childNodes[i].innerHTML = "+";
 		}
 		if (indices[i] == 'bon')
 		{
-			rowResultatActuelle.childNodes[i].style.backgroundColor = "green";
+			rowResultatActuelle.childNodes[i].innerHTML = "-";
 		}
 	}
 	caseRowAct++;
