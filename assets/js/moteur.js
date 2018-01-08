@@ -9,10 +9,9 @@ var pionEnMouvement = false;
 var pionID;
 var pionEnMouvCouleur;
 var CaseRowId = 0;
-var couleursIdentiquesPresentes = false;
-var pionSelect;
 var pionPosX = 0;
 var pionPosY = 0;
+var pionsID = [];
 
 function optionsDefaut()
 {
@@ -67,6 +66,9 @@ function placementCases()
 		let couleur;
 		couleur = couleurDif[i];
 		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, \''+couleur+'\');" onmousedown="choisirPion(event, this, \''+couleur+'\');"></span>';
+		pionsID[i] = document.getElementById('pions').childNodes[i];
+		console.log('pions'+i+':'+pionsID[i].offsetLeft);
+
 	}
 	deplacerTablePions();
 }
@@ -133,14 +135,14 @@ function deposerPion(pionSelect)
 			pionSelect.style.left = rowActuelle.childNodes[i].offsetLeft + (rowActuelle.childNodes[i].offsetWidth /2) - pionSelect.offsetWidth /2 + 'px';
 			pionSelect.style.top = rowActuelle.childNodes[i].offsetTop + (pionSelect.offsetHeight /2) - rowActuelle.childNodes[i].offsetHeight /2 + 'px';
 			pionSelect.style.zIndex = 500;
-			setTimeout(couleurIdentiques, 40);
+			verifRowActuComplete();
 			return;
 		}
 	}
 	pionSelect.style.border = "none";
 	pionSelect.style.position = 'static';
 	pionSelect.style.zIndex = 500;
-	setTimeout(couleurIdentiques, 40);
+	verifRowActuComplete();
 }
 function choisirPion(event, pionSelect, couleur)
 {
@@ -224,45 +226,34 @@ function deposerPionTouch(couleur)
 	pionEnMouvement = false;
 	document.body.style.overflow = "auto";
 }
-/* Verification couleurs identiques */
-function couleurIdentiques()
-{
-	couleursIdentiquesPresentes = false;
-	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
-	for (i = 0, j = colNbr-1; i < colNbr-1; i++, j--)
-	{
-		for (k = j; k > 0; k--)
-		{
-			if (rowActuelle.childNodes[i].style.backgroundColor && rowActuelle.childNodes[i].style.backgroundColor == rowActuelle.childNodes[i+k].style.backgroundColor)
-			{
-				afficherInformations("couleurs identiques non autorisées", "red", "22px");
-				couleursIdentiquesPresentes = true;
-				return;
-			}
-		}
-	}
-	if (couleursIdentiquesPresentes == false)
-	{
-		document.getElementById('informations').style.display = "none";
-		verifRowActuComplete();
-	}
-}
-
 /* Verifie si la rangée actuelle est complète */
 function verifRowActuComplete()
 {
 	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
 	let casesRempliesNbr = 0;
+
 	for (i = 0; i < colNbr; i++)
-	{
-		if (rowActuelle.childNodes[i].style.backgroundColor)
+	{				
+
+	console.log('case'+rowActuelle.childNodes[i].offsetLeft);
+
+
+		for (j = 0; j < couleurDifNbr; j++)
 		{
-			casesRempliesNbr++
-			if (casesRempliesNbr == colNbr)
-			{
-				comparer();
+			
+			console.log('pions'+j+':'+pionsID[j].offsetLeft);
+
+
+			if (pionsID[j].style.left == (rowActuelle.childNodes[i].offsetLeft + 'px'))
+			{	
+				alert('yes');
+				casesRempliesNbr++;
 			}
 		}
+	}
+	if (casesRempliesNbr == colNbr)
+	{
+		comparer();
 	}
 }
 function comparer()
