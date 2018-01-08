@@ -10,6 +10,9 @@ var pionID;
 var pionEnMouvCouleur;
 var CaseRowId = 0;
 var couleursIdentiquesPresentes = false;
+var pionSelect;
+var pionPosX = 0;
+var pionPosY = 0;
 
 function optionsDefaut()
 {
@@ -63,7 +66,7 @@ function placementCases()
 	{
 		let couleur;
 		couleur = couleurDif[i];
-		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, this, \''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
+		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, \''+couleur+'\');" onmousedown="choisirPion(event, this, \''+couleur+'\');"></span>';
 	}
 	deplacerTablePions();
 }
@@ -103,47 +106,76 @@ function desactiveOnMouseOver()
 		rowActuelle.childNodes[i].onmouseover = null;
 	}	
 }
-function deposerPion(couleur)
+function deposerPion(pionSelect)
 {
 	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
+	let rowPions = document.getElementById('pions');
+
+
 	for (i = 0; i < colNbr; i++)
 	{
-		rowActuelle.childNodes[i].onmouseover = function()
-		{
-			this.style.backgroundColor = couleur;
+		
+		if (rowActuelle.childNodes[i].offsetLeft - pionSelect.offsetWidth/2 < pionSelect.offsetLeft && (rowActuelle.childNodes[i].offsetLeft + rowActuelle.childNodes[i].offsetWidth + pionSelect.offsetWidth/2) > (pionSelect.offsetLeft + pionSelect.offsetWidth) && 
+			rowActuelle.childNodes[i].offsetTop - pionSelect.offsetHeight < pionSelect.offsetTop && (rowActuelle.childNodes[i].offsetTop + rowActuelle.childNodes[i].offsetHeight + pionSelect.offsetHeight) > (pionSelect.offsetTop + pionSelect.offsetHeight))
+		{	
+
+			for (j = 0; j < couleurDifNbr; j++)
+			{
+				rowPions.childNodes[j];
+				if (rowPions.childNodes[j].offsetLeft - pionSelect.offsetWidth/2 < pionSelect.offsetLeft && (rowPions.childNodes[j].offsetLeft + rowPions.childNodes[j].offsetWidth + pionSelect.offsetWidth/2) > (pionSelect.offsetLeft + pionSelect.offsetWidth) && 
+					rowPions.childNodes[j].offsetTop - pionSelect.offsetHeight < pionSelect.offsetTop && (rowPions.childNodes[j].offsetTop + rowPions.childNodes[j].offsetHeight + pionSelect.offsetHeight) > (pionSelect.offsetTop + pionSelect.offsetHeight) && rowPions.childNodes[j] != pionSelect)
+				{
+					if (pionSelect.style.border == "2px solid black")
+					{
+						rowPions.childNodes[j].style.left = pionPosX;
+						rowPions.childNodes[j].style.top = pionPosY;
+					}
+					else
+					{
+						rowPions.childNodes[j].style.position = 'static';
+						rowPions.childNodes[j].style.border = "none";
+					}
+				}
+			}
+			pionSelect.style.border = "2px solid black";
+			pionSelect.style.left = rowActuelle.childNodes[i].offsetLeft + (rowActuelle.childNodes[i].offsetWidth /2) - pionSelect.offsetWidth /2 + 'px';
+			pionSelect.style.top = rowActuelle.childNodes[i].offsetTop + (pionSelect.offsetHeight /2) - rowActuelle.childNodes[i].offsetHeight /2 + 'px';
+			pionSelect.style.zIndex = 500;
+			setTimeout(desactiveOnMouseOver, 30);
+			setTimeout(couleurIdentiques, 40);
+			return;
 		}
 	}
+	pionSelect.style.border = "none";
+	pionSelect.style.position = 'static';
 	setTimeout(desactiveOnMouseOver, 30);
 	setTimeout(couleurIdentiques, 40);
 }
-function choisirPion(event, couleur)
+function choisirPion(event, pionSelect, couleur)
 {
+	pionPosX = pionSelect.style.left;
+	pionPosY = pionSelect.style.top;
+
 	if (joueurTour == true)
 	{
-		document.getElementById('pions').innerHTML += '<div id="couleurSelect" class="pion '+couleur+'"></div>';
-		couleurSelect.style.position = 'absolute';
-		couleurSelect.style.zIndex = 1000;
+		pionSelect.style.position = 'absolute';
+		pionSelect.style.zIndex = 1000;
 		moveAt(event.pageX, event.pageY);
-		/* Bouge l'élément quand la souris bouge */
 		function moveAt(pageX, pageY)
 		{
-			if (document.getElementById('couleurSelect'))
-			{
-				couleurSelect.style.left = pageX - couleurSelect.offsetWidth / 2 + 'px';
-				couleurSelect.style.top = pageY - couleurSelect.offsetHeight / 2 + 'px';
-			}
+			pionSelect.style.left = pageX - pionSelect.offsetWidth / 2 + 'px';
+			pionSelect.style.top = pageY - pionSelect.offsetHeight / 2 + 'px';
 		}
 		function onMouseMove(event)
 		{
 			moveAt(event.pageX, event.pageY);
 		}
 		document.addEventListener('mousemove', onMouseMove);
-		/* Lache l'élément lorsque le clique de la souris est relaché */
-		couleurSelect.onmouseup = function()
+		document.onmouseup = function()
 		{
-			couleurSelect.onmouseup = null;
-			document.getElementById("couleurSelect").remove();
-			deposerPion(couleur);
+			document.removeEventListener('mousemove', onMouseMove);
+			document.onmouseup = null;
+			deposerPion(pionSelect);
 		};
 	}
 }
