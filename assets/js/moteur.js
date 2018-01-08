@@ -136,6 +136,7 @@ function deposerPion(pionSelect)
 			pionSelect.style.position = 'static';
 			pionSelect.style.border = "2px solid black";
 			pionSelect.style.zIndex = 500;
+			verifRowActuComplete();
 			return;
 		}
 	} /* si le pion est laché hors jeu, il est remis dans la boîte de pions */
@@ -145,6 +146,7 @@ function deposerPion(pionSelect)
 	pionSelect.style.border = "none";
 	pionSelect.style.position = 'static';
 	pionSelect.style.zIndex = 500;
+	verifRowActuComplete();
 }
 function choisirPion(event, pionSelect, couleur)
 {
@@ -233,6 +235,13 @@ function verifRowActuComplete()
 	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
 	let casesRempliesNbr = 0;
 
+	for (i = 0; i < colNbr; i++)
+	{
+		if (rowActuelle.childNodes[i].children.length > 0)
+		{
+			casesRempliesNbr++;
+		}
+	}
 
 	if (casesRempliesNbr == colNbr)
 	{
