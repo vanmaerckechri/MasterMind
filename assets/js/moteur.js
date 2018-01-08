@@ -109,29 +109,27 @@ function deposerPion(pionSelect)
 		{	
 
 			for (j = 0; j < rowPions.length; j++)
-			{
+			{					
+				/* si le pion est laché sur une case active occupée... */
 				if (rowPions[j].offsetLeft - pionSelect.offsetWidth/2 < pionSelect.offsetLeft && (rowPions[j].offsetLeft + rowPions[j].offsetWidth + pionSelect.offsetWidth/2 ) > (pionSelect.offsetLeft + pionSelect.offsetWidth) && 
 					rowPions[j].offsetTop - pionSelect.offsetHeight < pionSelect.offsetTop && (rowPions[j].offsetTop + rowPions[j].offsetHeight + pionSelect.offsetHeight) > (pionSelect.offsetTop + pionSelect.offsetHeight) && rowPions[j] != pionSelect)
 				{
+					/* ...si l'origine du pion en activité était aussi une case... */
 					if (pionSelect.parentElement != document.getElementById("pions"))
 					{
+						/* ...on place le pion déjà présent à la place de l'origine du pion en acitivité */
 						pionCaseParent.appendChild(rowPions[j]);
 					}
 					else
 					{
+						/* Sinon on range le pion présent dans la boîte de pions */
 						let parent = document.getElementById('pions');
 						let child = rowPions[j];
 						parent.appendChild(child);
 						child.style.border = "none";
-
-						rowActuelle.childNodes[i].appendChild(pionSelect);
-						pionSelect.style.position = 'static';
-						pionSelect.style.border = "2px solid black";
-						pionSelect.style.zIndex = 500;
-						return;
 					}
 				}
-			}
+			} /* si le pion est laché dans une des cases pour trouver le code, on l'y intègre */
 			let parent = rowActuelle.childNodes[i];
 			let child = pionSelect;
 			parent.appendChild(child);
@@ -140,7 +138,7 @@ function deposerPion(pionSelect)
 			pionSelect.style.zIndex = 500;
 			return;
 		}
-	}
+	} /* si le pion est laché hors jeu, il est remis dans la boîte de pions */
 	let parent = document.getElementById('pions');
 	let child = pionSelect;
 	parent.appendChild(child);
