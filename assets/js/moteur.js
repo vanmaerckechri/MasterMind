@@ -9,9 +9,7 @@ var pionEnMouvement = false;
 var pionID;
 var pionEnMouvCouleur;
 var CaseRowId = 0;
-var pionPosX = 0;
-var pionPosY = 0;
-var pionsID = [];
+var pionCaseParent;
 
 function optionsDefaut()
 {
@@ -66,9 +64,6 @@ function placementCases()
 		let couleur;
 		couleur = couleurDif[i];
 		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, \''+couleur+'\');" onmousedown="choisirPion(event, this, \''+couleur+'\');"></span>';
-		pionsID[i] = document.getElementById('pions').childNodes[i];
-		console.log('pions'+i+':'+pionsID[i].offsetLeft);
-
 	}
 	deplacerTablePions();
 }
@@ -103,7 +98,7 @@ function combiSecreteInstall()
 function deposerPion(pionSelect)
 {
 	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
-	let rowPions = document.getElementById('pions');
+	let rowPions = document.querySelectorAll('.pion');
 
 
 	for (i = 0; i < colNbr; i++)
@@ -113,41 +108,49 @@ function deposerPion(pionSelect)
 			rowActuelle.childNodes[i].offsetTop - pionSelect.offsetHeight < pionSelect.offsetTop && (rowActuelle.childNodes[i].offsetTop + rowActuelle.childNodes[i].offsetHeight + pionSelect.offsetHeight) > (pionSelect.offsetTop + pionSelect.offsetHeight))
 		{	
 
-			for (j = 0; j < couleurDifNbr; j++)
+			for (j = 0; j < rowPions.length; j++)
 			{
-				rowPions.childNodes[j];
-				if (rowPions.childNodes[j].offsetLeft - pionSelect.offsetWidth/2 - 4 < pionSelect.offsetLeft && (rowPions.childNodes[j].offsetLeft + rowPions.childNodes[j].offsetWidth + pionSelect.offsetWidth/2 + 4) > (pionSelect.offsetLeft + pionSelect.offsetWidth) && 
-					rowPions.childNodes[j].offsetTop - pionSelect.offsetHeight < pionSelect.offsetTop && (rowPions.childNodes[j].offsetTop + rowPions.childNodes[j].offsetHeight + pionSelect.offsetHeight) > (pionSelect.offsetTop + pionSelect.offsetHeight) && rowPions.childNodes[j] != pionSelect)
+				if (rowPions[j].offsetLeft - pionSelect.offsetWidth/2 < pionSelect.offsetLeft && (rowPions[j].offsetLeft + rowPions[j].offsetWidth + pionSelect.offsetWidth/2 ) > (pionSelect.offsetLeft + pionSelect.offsetWidth) && 
+					rowPions[j].offsetTop - pionSelect.offsetHeight < pionSelect.offsetTop && (rowPions[j].offsetTop + rowPions[j].offsetHeight + pionSelect.offsetHeight) > (pionSelect.offsetTop + pionSelect.offsetHeight) && rowPions[j] != pionSelect)
 				{
-					if (pionSelect.style.border == "2px solid black")
+					if (pionSelect.parentElement != document.getElementById("pions"))
 					{
-						rowPions.childNodes[j].style.left = pionPosX;
-						rowPions.childNodes[j].style.top = pionPosY;
+						pionCaseParent.appendChild(rowPions[j]);
 					}
 					else
 					{
-						rowPions.childNodes[j].style.position = 'static';
-						rowPions.childNodes[j].style.border = "none";
+						let parent = document.getElementById('pions');
+						let child = rowPions[j];
+						parent.appendChild(child);
+						child.style.border = "none";
+
+						rowActuelle.childNodes[i].appendChild(pionSelect);
+						pionSelect.style.position = 'static';
+						pionSelect.style.border = "2px solid black";
+						pionSelect.style.zIndex = 500;
+						return;
 					}
 				}
 			}
+			let parent = rowActuelle.childNodes[i];
+			let child = pionSelect;
+			parent.appendChild(child);
+			pionSelect.style.position = 'static';
 			pionSelect.style.border = "2px solid black";
-			pionSelect.style.left = rowActuelle.childNodes[i].offsetLeft + (rowActuelle.childNodes[i].offsetWidth /2) - pionSelect.offsetWidth /2 + 'px';
-			pionSelect.style.top = rowActuelle.childNodes[i].offsetTop + (pionSelect.offsetHeight /2) - rowActuelle.childNodes[i].offsetHeight /2 + 'px';
 			pionSelect.style.zIndex = 500;
-			verifRowActuComplete();
 			return;
 		}
 	}
+	let parent = document.getElementById('pions');
+	let child = pionSelect;
+	parent.appendChild(child);
 	pionSelect.style.border = "none";
 	pionSelect.style.position = 'static';
 	pionSelect.style.zIndex = 500;
-	verifRowActuComplete();
 }
 function choisirPion(event, pionSelect, couleur)
 {
-	pionPosX = pionSelect.style.left;
-	pionPosY = pionSelect.style.top;
+		pionCaseParent = pionSelect.parentElement;
 
 	if (joueurTour == true)
 	{
@@ -232,25 +235,7 @@ function verifRowActuComplete()
 	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
 	let casesRempliesNbr = 0;
 
-	for (i = 0; i < colNbr; i++)
-	{				
 
-	console.log('case'+rowActuelle.childNodes[i].offsetLeft);
-
-
-		for (j = 0; j < couleurDifNbr; j++)
-		{
-			
-			console.log('pions'+j+':'+pionsID[j].offsetLeft);
-
-
-			if (pionsID[j].style.left == (rowActuelle.childNodes[i].offsetLeft + 'px'))
-			{	
-				alert('yes');
-				casesRempliesNbr++;
-			}
-		}
-	}
 	if (casesRempliesNbr == colNbr)
 	{
 		comparer();
