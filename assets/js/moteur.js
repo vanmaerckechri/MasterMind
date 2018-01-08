@@ -98,14 +98,6 @@ function combiSecreteInstall()
 }
 
 /* Déplacement du pion choisi - drag and drop*/
-function desactiveOnMouseOver()
-{
-	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
-	for (i = 0; i < colNbr; i++)
-	{
-		rowActuelle.childNodes[i].onmouseover = null;
-	}	
-}
 function deposerPion(pionSelect)
 {
 	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
@@ -122,7 +114,7 @@ function deposerPion(pionSelect)
 			for (j = 0; j < couleurDifNbr; j++)
 			{
 				rowPions.childNodes[j];
-				if (rowPions.childNodes[j].offsetLeft - pionSelect.offsetWidth/2 < pionSelect.offsetLeft && (rowPions.childNodes[j].offsetLeft + rowPions.childNodes[j].offsetWidth + pionSelect.offsetWidth/2) > (pionSelect.offsetLeft + pionSelect.offsetWidth) && 
+				if (rowPions.childNodes[j].offsetLeft - pionSelect.offsetWidth/2 - 4 < pionSelect.offsetLeft && (rowPions.childNodes[j].offsetLeft + rowPions.childNodes[j].offsetWidth + pionSelect.offsetWidth/2 + 4) > (pionSelect.offsetLeft + pionSelect.offsetWidth) && 
 					rowPions.childNodes[j].offsetTop - pionSelect.offsetHeight < pionSelect.offsetTop && (rowPions.childNodes[j].offsetTop + rowPions.childNodes[j].offsetHeight + pionSelect.offsetHeight) > (pionSelect.offsetTop + pionSelect.offsetHeight) && rowPions.childNodes[j] != pionSelect)
 				{
 					if (pionSelect.style.border == "2px solid black")
@@ -141,14 +133,13 @@ function deposerPion(pionSelect)
 			pionSelect.style.left = rowActuelle.childNodes[i].offsetLeft + (rowActuelle.childNodes[i].offsetWidth /2) - pionSelect.offsetWidth /2 + 'px';
 			pionSelect.style.top = rowActuelle.childNodes[i].offsetTop + (pionSelect.offsetHeight /2) - rowActuelle.childNodes[i].offsetHeight /2 + 'px';
 			pionSelect.style.zIndex = 500;
-			setTimeout(desactiveOnMouseOver, 30);
 			setTimeout(couleurIdentiques, 40);
 			return;
 		}
 	}
 	pionSelect.style.border = "none";
 	pionSelect.style.position = 'static';
-	setTimeout(desactiveOnMouseOver, 30);
+	pionSelect.style.zIndex = 500;
 	setTimeout(couleurIdentiques, 40);
 }
 function choisirPion(event, pionSelect, couleur)
