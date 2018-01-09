@@ -1,5 +1,6 @@
 html
 {
+	pointer-events: none;
 }
 body
 {
@@ -16,9 +17,14 @@ fieldset
 {
 	margin-bottom: 10px;
 }
+input
+{
+	pointer-events: auto;
+}
 button
 {
 	margin-bottom: 10px;
+	pointer-events: auto;
 }
 h1
 {

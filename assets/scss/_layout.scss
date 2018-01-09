@@ -27,14 +27,15 @@
 	color: red;
   	text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
 	background-color: rgba(255, 255, 255, .3);
-	pointer-events: none;
 }
 .case, .caseSecrete
 {
 	margin: 5px;
 	border: 2px solid grey;
 	border-radius: 50%;
-	display: inline-block;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 48px;
 	height: 48px;
 	background-color: grey;
@@ -79,7 +80,6 @@
 	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
 	font-weight: 900;
 	background-color: grey;
-	pointer-events: none;
 }
 #pions
 {
@@ -97,7 +97,8 @@
 	border-radius: 50%;
 	display: inline-block;
 	width: 42px;
-	height: 42px;	
+	height: 42px;
+	pointer-events: auto;
 }
 .yellow
 {
