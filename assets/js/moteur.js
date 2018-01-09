@@ -63,7 +63,7 @@ function placementCases()
 	{
 		let couleur;
 		couleur = couleurDif[i];
-		document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, \''+couleur+'\');" onmousedown="choisirPion(event, this, \''+couleur+'\');"></span>';
+		document.getElementById('pions').innerHTML += '<span class="pion" style="background-color:'+couleur+';" ontouchmove="choisirPionTouch(event, this, \''+couleur+'\');" onmousedown="choisirPion(event, this, \''+couleur+'\');"></span>';
 	}
 	deplacerTablePions();
 }
@@ -150,7 +150,7 @@ function deposerPion(pionSelect)
 }
 function choisirPion(event, pionSelect, couleur)
 {
-		pionCaseParent = pionSelect.parentElement;
+	pionCaseParent = pionSelect.parentElement;
 
 	if (joueurTour == true)
 	{
@@ -176,59 +176,41 @@ function choisirPion(event, pionSelect, couleur)
 	}
 }
 /* TACTILE : Déplacement du pion choisi - drag and drop*/
-function choisirPionTouch(event, pionChoisi, couleur)
+function choisirPionTouch(event, pionSelect, couleur)
 {
+	pionCaseParent = pionSelect.parentElement;
+
 	if (joueurTour == true && pionEnMouvement == false)
 	{
 		event.preventDefault();
 		pionEnMouvCouleur = couleur;
-		pionID = pionChoisi;
+		pionID = pionSelect;
 		pionEnMouvement = true;
-		pionChoisi.style.position = 'absolute';
-		pionChoisi.style.zIndex = 1000;
+		pionSelect.style.position = 'absolute';
+		pionSelect.style.zIndex = 1000;
 		document.body.style.overflow = "hidden";
 	}
-		moveAt(event.touches[0].pageX, event.touches[0].pageY, pionChoisi);
+
+	moveAt(event.touches[0].pageX, event.touches[0].pageY, pionSelect);
 }
 
-		function moveAt(pageX, pageY, pionChoisi)
-		{
-			pionChoisi.style.left = pageX - pionChoisi.offsetWidth / 2 + 'px';
-			pionChoisi.style.top = pageY - pionChoisi.offsetHeight / 2 + 'px';
-		}
+function moveAt(pageX, pageY, pionSelect)
+{
+	pionSelect.style.left = pageX - pionSelect.offsetWidth / 2 + 'px';
+	pionSelect.style.top = pageY - pionSelect.offsetHeight / 2 + 'px';
+}
 
-function relacherPion()
+function appelDeposerPion()
 {
 	if (pionEnMouvement == true)
 	{	
-		couleur = pionEnMouvCouleur;
-		deposerPionTouch(couleur);
+		deposerPion(pionID);
+		pionEnMouvement = false;
+		document.body.style.overflow = "auto";
 	}
 }
-document.addEventListener('touchend', relacherPion);
-function deposerPionTouch(couleur)
-{
-	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
-	for (i = 0; i < colNbr; i++)
-	{
-		rowActuelle.childNodes[i];
-		if (rowActuelle.childNodes[i].offsetLeft - pionID.offsetWidth/2 < pionID.offsetLeft && (rowActuelle.childNodes[i].offsetLeft + rowActuelle.childNodes[i].offsetWidth + pionID.offsetWidth/2) > (pionID.offsetLeft + pionID.offsetWidth) && 
-			rowActuelle.childNodes[i].offsetTop - pionID.offsetHeight < pionID.offsetTop && (rowActuelle.childNodes[i].offsetTop + rowActuelle.childNodes[i].offsetHeight + pionID.offsetHeight) > (pionID.offsetTop + pionID.offsetHeight))
-		{
-			rowActuelle.childNodes[i].style.backgroundColor = couleur;
-			pionID.remove();
-			document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, this, \''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
-			pionEnMouvement = false;
-			document.body.style.overflow = "auto";
-			couleurIdentiques();
-			return;
-		}
-	}
-	pionID.remove();
-	document.getElementById('pions').innerHTML += '<span class="pion '+couleur+'" ontouchmove="choisirPionTouch(event, this, \''+couleur+'\');" onmousedown="choisirPion(event,\''+couleur+'\');"></span>';
-	pionEnMouvement = false;
-	document.body.style.overflow = "auto";
-}
+document.addEventListener('touchend', appelDeposerPion);
+
 /* Verifie si la rangée actuelle est complète */
 function verifRowActuComplete()
 {
@@ -245,8 +227,24 @@ function verifRowActuComplete()
 
 	if (casesRempliesNbr == colNbr)
 	{
-		comparer();
+		rangerPions();
 	}
+}
+function rangerPions()
+{
+	let rowActuelle = document.getElementById('caseRow'+caseRowAct);
+	for (i = 0; i < colNbr; i++)
+	{
+		rowActuelle.childNodes[i].style.backgroundColor = rowActuelle.childNodes[i].childNodes[0].style.backgroundColor;
+
+		let parent = document.getElementById('pions');
+		let child = rowActuelle.childNodes[i].childNodes[0];
+		parent.appendChild(child);
+		child.style.border = "none";
+		child.style.position = 'static';
+		child.style.zIndex = 500;
+	}
+	comparer();
 }
 function comparer()
 {
