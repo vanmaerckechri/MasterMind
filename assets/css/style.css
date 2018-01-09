@@ -6,9 +6,6 @@ html, body, div, span, h1, h2, h3, p, form, fieldset, legend, label, input {
   vertical-align: baseline;
   font-weight: normal; }
 
-html {
-  pointer-events: none; }
-
 body {
   overscroll-behavior: contain;
   display: flex;
@@ -17,7 +14,8 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-color: black;
-  color: white; }
+  color: white;
+  pointer-events: none; }
 
 fieldset {
   margin-bottom: 10px; }
@@ -76,12 +74,15 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 48px;
-  height: 48px;
+  min-width: 42px;
+  min-height: 42px;
+  max-width: 42px;
+  max-height: 42px;
   background-color: grey; }
 
 .casesRow, #rowSecrete {
-  display: flex; }
+  display: flex;
+  justify-content: space-between; }
 
 #rowSecrete {
   border-top-right-radius: 10px;
@@ -128,8 +129,10 @@ h3 {
   border: 2px solid grey;
   border-radius: 50%;
   display: inline-block;
-  width: 42px;
-  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  max-width: 42px;
+  max-height: 42px;
   pointer-events: auto; }
 
 .yellow {

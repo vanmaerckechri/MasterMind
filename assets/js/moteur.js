@@ -65,6 +65,8 @@ function placementCases()
 		couleur = couleurDif[i];
 		document.getElementById('pions').innerHTML += '<span class="pion" style="background-color:'+couleur+';" ontouchmove="choisirPionTouch(event, this, \''+couleur+'\');" onmousedown="choisirPion(event, this, \''+couleur+'\');"></span>';
 	}
+	let fixeHeight = document.getElementById('pions').offsetHeight;
+	document.getElementById('pions').style.height = fixeHeight+'px';
 	deplacerTablePions();
 }
 /* Construction Combinaison Secrete */
@@ -104,7 +106,7 @@ function deposerPion(pionSelect)
 	for (i = 0; i < colNbr; i++)
 	{
 		
-		if (rowActuelle.childNodes[i].offsetLeft - pionSelect.offsetWidth/2 < pionSelect.offsetLeft && (rowActuelle.childNodes[i].offsetLeft + rowActuelle.childNodes[i].offsetWidth + pionSelect.offsetWidth/2) > (pionSelect.offsetLeft + pionSelect.offsetWidth) && 
+		if (rowActuelle.childNodes[i].offsetLeft - pionSelect.offsetWidth < pionSelect.offsetLeft && (rowActuelle.childNodes[i].offsetLeft + rowActuelle.childNodes[i].offsetWidth + pionSelect.offsetWidth) > (pionSelect.offsetLeft + pionSelect.offsetWidth) && 
 			rowActuelle.childNodes[i].offsetTop - pionSelect.offsetHeight < pionSelect.offsetTop && (rowActuelle.childNodes[i].offsetTop + rowActuelle.childNodes[i].offsetHeight + pionSelect.offsetHeight) > (pionSelect.offsetTop + pionSelect.offsetHeight))
 		{	
 

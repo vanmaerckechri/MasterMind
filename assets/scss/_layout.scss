@@ -36,13 +36,16 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 48px;
-	height: 48px;
+	min-width: 42px;
+	min-height: 42px;
+	max-width: 42px;
+	max-height: 42px;
 	background-color: grey;
 }
 .casesRow, #rowSecrete
 {
 	display: flex;
+	justify-content: space-between;
 }
 #rowSecrete
 {
@@ -96,8 +99,10 @@
 	border: 2px solid grey;
 	border-radius: 50%;
 	display: inline-block;
-	width: 42px;
-	height: 42px;
+	min-width: 42px;
+	min-height: 42px;
+	max-width: 42px;
+	max-height: 42px;
 	pointer-events: auto;
 }
 .yellow
