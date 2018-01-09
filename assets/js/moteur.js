@@ -111,12 +111,13 @@ function deposerPion(pionSelect)
 			for (j = 0; j < rowPions.length; j++)
 			{					
 				/* si le pion est laché sur une case active occupée... */
-				if (rowPions[j].offsetLeft - pionSelect.offsetWidth/2 < pionSelect.offsetLeft && (rowPions[j].offsetLeft + rowPions[j].offsetWidth + pionSelect.offsetWidth/2 ) > (pionSelect.offsetLeft + pionSelect.offsetWidth) && 
+				if (rowPions[j].offsetLeft - pionSelect.offsetWidth < pionSelect.offsetLeft && (rowPions[j].offsetLeft + rowPions[j].offsetWidth + pionSelect.offsetWidth ) > (pionSelect.offsetLeft + pionSelect.offsetWidth) && 
 					rowPions[j].offsetTop - pionSelect.offsetHeight < pionSelect.offsetTop && (rowPions[j].offsetTop + rowPions[j].offsetHeight + pionSelect.offsetHeight) > (pionSelect.offsetTop + pionSelect.offsetHeight) && rowPions[j] != pionSelect)
 				{
 					/* ...si l'origine du pion en activité était aussi une case... */
 					if (pionSelect.parentElement != document.getElementById("pions"))
 					{
+						console.log(pionCaseParent);
 						/* ...on place le pion déjà présent à la place de l'origine du pion en acitivité */
 						pionCaseParent.appendChild(rowPions[j]);
 					}
